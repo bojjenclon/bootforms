@@ -18,6 +18,12 @@ class GroupWrapper
         return $this->formGroup->render();
     }
 
+    public function feedback($text)
+    {
+    	$this->formGroup->feedback($text);
+    	return $this;
+    }
+
     public function helpBlock($text)
     {
         $this->formGroup->helpBlock($text);

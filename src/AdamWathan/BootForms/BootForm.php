@@ -25,6 +25,18 @@ class BootForm
         return $this->builder->open();
     }
 
+		public function openSearch($id = null)
+		{
+			$this->builder = $this->basicFormBuilder;
+      $form = $this->builder->open()->addClass('typeahead')->attribute('role', 'search');
+      
+      if ($id !== null) {
+        $form->attribute('id', $id);
+      }
+
+			return $form;
+		}
+
     public function __call($method, $parameters)
     {
         return call_user_func_array([$this->builder, $method], $parameters);

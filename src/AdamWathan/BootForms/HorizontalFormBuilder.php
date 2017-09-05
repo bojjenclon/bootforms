@@ -33,7 +33,7 @@ class HorizontalFormBuilder extends BasicFormBuilder
     {
         $label = $this->builder->label($label, $name)
             ->addClass($this->getLabelClass())
-            ->addClass('control-label')
+            ->addClass('col-form-label')
             ->forId($name);
 
         $control->id($name)->addClass('form-control');
@@ -72,7 +72,7 @@ class HorizontalFormBuilder extends BasicFormBuilder
         return new OffsetFormGroup($button, $this->columnSizes);
     }
 
-    public function submit($value = "Submit", $type = "btn-default")
+    public function submit($value = "Submit", $type = "btn-primary")
     {
         $button = $this->builder->submit($value)->addClass('btn')->addClass($type);
         return new OffsetFormGroup($button, $this->columnSizes);
@@ -81,7 +81,8 @@ class HorizontalFormBuilder extends BasicFormBuilder
     public function checkbox($label, $name)
     {
         $control = $this->builder->checkbox($name);
-        $checkGroup = $this->checkGroup($label, $name, $control)->addClass('checkbox');
+        $control->addClass('form-check-input');
+        $checkGroup = $this->checkGroup($label, $name, $control)->addClass('form-check');
 
         return new OffsetFormGroup($this->wrap($checkGroup), $this->columnSizes);
     }
@@ -89,6 +90,7 @@ class HorizontalFormBuilder extends BasicFormBuilder
     protected function checkGroup($label, $name, $control)
     {
         $label = $this->builder->label($label, $name)->after($control);
+        $label->addClass('form-check-label');
 
         $checkGroup = new CheckGroup($label);
 

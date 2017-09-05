@@ -18,14 +18,15 @@ class BasicFormBuilder
 
     protected function formGroup($label, $name, $control)
     {
-        $label = $this->builder->label($label)->addClass('control-label')->forId($name);
+        $label = $this->builder->label($label)->addClass('col-form-label')->forId($name);
         $control->id($name)->addClass('form-control');
 
         $formGroup = new FormGroup($label, $control);
 
         if ($this->builder->hasError($name)) {
-            $formGroup->helpBlock($this->builder->getError($name));
-            $formGroup->addClass('has-error');
+            //$formGroup->helpBlock($this->builder->getError($name));
+            $formGroup->feedback($this->builder->getError($name));
+            $formGroup->addClass('has-danger');
         }
 
         return $this->wrap($formGroup);
@@ -55,7 +56,7 @@ class BasicFormBuilder
         return $this->builder->button($value, $name)->addClass('btn')->addClass($type);
     }
 
-    public function submit($value = "Submit", $type = "btn-default")
+    public function submit($value = "Submit", $type = "btn-primary")
     {
         return $this->builder->submit($value)->addClass('btn')->addClass($type);
     }
@@ -173,6 +174,14 @@ class BasicFormBuilder
 
         return $this->formGroup($label, $name, $control);
     }
+
+    // for use with typeahead,js
+		public function search($label, $name, $placeholder = 'Search')
+		{
+				$control = $this->builder->text($name)->type('search')->addClass('search-input')->attribute('placeholder', $placeholder)->attribute('autocomplete', 'off');
+
+				return $this->formGroup($label, $name, $control);
+		}
 
     public function __call($method, $parameters)
     {

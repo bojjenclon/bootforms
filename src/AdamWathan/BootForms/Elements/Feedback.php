@@ -2,24 +2,23 @@
 
 use AdamWathan\Form\Elements\Element;
 
-class HelpBlock extends Element
+class Feedback extends Element
 {
     private $message;
 
     public function __construct($message)
     {
         $this->message = $message;
-        $this->addClass('form-text');
-        $this->addClass('text-muted');
+        $this->addClass('form-control-feedback');
     }
 
     public function render()
     {
-        $html = '<small';
+        $html = '<div';
         $html .= $this->renderAttributes();
         $html .= '>';
         $html .= $this->message;
-        $html .= '</small>';
+        $html .= '</div>';
 
         return $html;
     }
